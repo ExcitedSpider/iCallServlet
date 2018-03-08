@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserMapper">   <!-- 命名空间，名字可以随意起，只要不冲突即可 -->
+    <sql id="cols">
+        account,password,school,job
+    </sql>
+    <!-- 对象映射，可以不写 -->
+    <!-- 查询功能，resultType 设置返回值类型 -->
+    <select id="findAll" resultType="dbserver.qe.com.bean.User">
+        SELECT * FROM user
+    </select>
+    <select id="findById" parameterType="int" resultType="dbserver.qe.com.bean.User">
+        SELECT * FROM user WHERE ID = #{id}
+    </select>
+    <select id="findByAccount" parameterType="java.lang.String" resultType="dbserver.qe.com.bean.User">
+        SELECT * FROM user WHERE account = #{account}
+    </select>
+    <insert id="insert" parameterType="dbserver.qe.com.bean.User">
+        INSERT INTO user (<include refid="cols"/>) VALUES (#{account},#{password},#{school},#{job})
+    </insert>
+    <update id="updatePassword" parameterType="java.lang.String">
+        UPDATE user set password=#{password}
+        WHERE id = #{id}
+    </update>
+    <update id="updateProfile" parameterType="dbserver.qe.com.bean.User">
+        UPDATE user
+        <set>
+            <if test="school =! null">
+                school = #{school},
+            </if>
+            <if test="job =! null">
+                job = #{job},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        DELETE FROM USER WHERE ID = #{id}
+    </delete>
+</mapper>
+

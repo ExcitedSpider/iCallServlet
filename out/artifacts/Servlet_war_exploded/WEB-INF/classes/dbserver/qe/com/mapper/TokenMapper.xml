@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TokenMapper">   <!-- 命名空间，名字可以随意起，只要不冲突即可 -->
+    <select id="selectByImei" parameterType="java.lang.String" resultType="dbserver.qe.com.bean.Token">
+        SELECT * FROM token WHERE imei = #{imei}
+    </select>
+    <select id="selectByAccount" parameterType="java.lang.String" resultType="dbserver.qe.com.bean.Token">
+        SELECT * FROM token WHERE account = #{account}
+    </select>
+    <select id="selectAll" resultType="dbserver.qe.com.bean.Token">
+        SELECT * FROM token
+    </select>
+    <insert id="insertToken" parameterType="dbserver.qe.com.bean.Token">
+        INSERT INTO token (account,imei,timestamp) VALUES (#{account},#{imei},#{timestamp})
+    </insert>
+    <insert id="insertOnNoDuplicatedKey" parameterType="dbserver.qe.com.bean.Token">
+        INSERT INTO token (account,imei,timestamp) VALUES (#{account},#{imei},#{timestamp}) ON DUPLICATE KEY UPDATE account = #{account},timestamp = #{timestamp}
+    </insert>
+    <delete id="deleteTokenByTimestamp" parameterType="java.lang.Long">
+        <!--需求long,所以传参时如果为int需要强制转换-->
+        DELETE FROM token WHERE timestamp &lt; #{timestamp}
+    </delete>
+    <update id="updateByTokenImei" parameterType="dbserver.qe.com.bean.Token">
+        UPDATE token set account = #{account},timestamp = #{timestamp} WHERE imei = #{imei}
+    </update>
+
+</mapper>
