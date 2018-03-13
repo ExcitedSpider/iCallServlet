@@ -21,5 +21,6 @@
     <mappers>
         <!-- 路径用 斜线（/） 分割，而不是用 点(.) -->
         <mapper resource="dbserver/qe/com/mapper/UserMapper.xml"/>
+        <mapper resource="dbserver/qe/com/mapper/GroupMapper.xml"/>
     </mappers>
 </configuration>

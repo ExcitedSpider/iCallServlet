@@ -1,5 +1,8 @@
 package dbserver.qe.com.bean;
 
+/**
+ * 这是一个代表用户的javabean
+ */
 public class User {
     private int id;
     private String account;
@@ -20,6 +23,9 @@ public class User {
         this.password = password;
         this.school = school;
         this.job = job;
+    }
+
+    public User() {
     }
 
     public int getId() {

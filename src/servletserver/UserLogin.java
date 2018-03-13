@@ -1,8 +1,8 @@
 package servletserver;
 
 import com.google.gson.Gson;
-import dbserver.qe.com.TokenTool;
-import dbserver.qe.com.UserProfileTool;
+import dbserver.qe.com.TokenDAO;
+import dbserver.qe.com.UserProfileDAO;
 import dbserver.qe.com.bean.Token;
 import dbserver.qe.com.bean.User;
 import org.apache.log4j.LogManager;
@@ -53,8 +53,8 @@ public class UserLogin extends HttpServlet {
         String username = request.getParameter("account");
         String password = request.getParameter("password");
 
-        UserProfileTool.start();
-        User user = UserProfileTool.findUserByAccount(username);
+        UserProfileDAO.start();
+        User user = UserProfileDAO.findUserByAccount(username);
         String userPassword = "none";
         //这是一个不会被匹配到的字符串，因为密码必须要8-18位，用来防止NullPointerException
         if (user != null)
@@ -73,9 +73,9 @@ public class UserLogin extends HttpServlet {
 
         Token token = new Token(account,imei,timestamp);
 
-        TokenTool.start();
-        TokenTool.insertOnNoDuplicatedKey(token);
-        TokenTool.close();
+        TokenDAO.start();
+        TokenDAO.insertOnNoDuplicatedKey(token);
+        TokenDAO.close();
 
         if(!imei.equals("imei")){
             form.put("token","true");

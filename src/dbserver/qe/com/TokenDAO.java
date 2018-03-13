@@ -10,20 +10,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class TokenTool {
+public class TokenDAO {
     static private SqlSession session;
 
     static public void start(){
-        try {
-            String resource = "dbserver/sqlMapConfig.xml";
-            InputStream inputStream = Resources.getResourceAsStream(resource);
-            SqlSessionFactory sqlSessionFactory =
-                    new SqlSessionFactoryBuilder().build(inputStream);
-
-            session = sqlSessionFactory.openSession();    // 获取到 SqlSession
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+            session = MybatisFactory.getFactory().openSession();    // 获取到 SqlSession
     }
     static public void close(){
         session.close();

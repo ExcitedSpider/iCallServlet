@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GroupMapper">
+    <select id="selectGroupById" resultType="dbserver.qe.com.bean.Group">
+        SELECT * FROM groups WHERE host = ${id};
+    </select>
+    <select id="selectGroupsByHost" resultType="dbserver.qe.com.bean.Group">
+        SELECT * FROM groups WHERE host = ${id};
+    </select>
+    <insert id="insertAndSetId" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO groups
+        (name,host,about,type,regist_date)
+        VALUES ('${name}',${host},'${about}',${type},CURDATE());
+    </insert>
+    <delete id="deleteGroupById">
+        DELETE FROM groups
+        WHERE id = ${id};
+    </delete>
+    <update id="updateGroupAbout">
+        UPDATE groups
+        SET about = '${about}'
+        WHERE id = ${id};
+    </update>
+
+    <insert id="joinGroup" parameterType="dbserver.qe.com.bean.Roster">
+        INSERT INTO roster
+        VALUES (${groupId},${userID},${type},CURDATE());
+    </insert>
+    
+    <select id="selectUserGroup" resultType="dbserver.qe.com.bean.Group">
+        SELECT *
+        FROM groups
+        WHERE id IN
+              (SELECT group_id
+               FROM roster
+               WHERE user_id = ${id}
+              );
+    </select>
+
+    <select id="selectRoster" resultType="dbserver.qe.com.bean.Roster">
+        SELECT * FROM roster
+        WHERE user_id = ${userID} AND group_id = ${groupId};
+    </select>
+
+    <delete id="deleteRoster">
+        DELETE FROM roster
+        WHERE group_id = ${groupId}
+        AND user_id = ${userID};
+    </delete>
+
+</mapper>

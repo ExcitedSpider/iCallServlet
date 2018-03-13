@@ -1,7 +1,7 @@
 package servletserver;
 
 import com.google.gson.Gson;
-import dbserver.qe.com.UserProfileTool;
+import dbserver.qe.com.UserProfileDAO;
 import dbserver.qe.com.bean.User;
 
 import javax.servlet.ServletException;
@@ -24,9 +24,9 @@ public class UserRegister extends HttpServlet {
         form = new HashMap<>();
 
         if(!checkIfExist(user)){
-            UserProfileTool.start();
-            UserProfileTool.addUser(user);
-            UserProfileTool.close();
+            UserProfileDAO.start();
+            UserProfileDAO.addUser(user);
+            UserProfileDAO.close();
 
             System.out.println("Success Create User:"+user.getAccount());
             form.put("register","true");
@@ -60,13 +60,13 @@ public class UserRegister extends HttpServlet {
     private boolean checkIfExist(User user){
         if(user.getAccount()!=null)
             System.out.println(user.getAccount());
-        UserProfileTool.start();
-        User user1= UserProfileTool.findUserByAccount(user.getAccount());
+        UserProfileDAO.start();
+        User user1= UserProfileDAO.findUserByAccount(user.getAccount());
         if(user1!=null){
-            UserProfileTool.close();
+            UserProfileDAO.close();
             return true;
         }else {
-            UserProfileTool.close();
+            UserProfileDAO.close();
             return false;
         }
 

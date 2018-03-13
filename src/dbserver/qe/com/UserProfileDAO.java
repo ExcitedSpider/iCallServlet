@@ -8,20 +8,11 @@ import sun.rmi.runtime.Log;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class UserProfileTool {
+public class UserProfileDAO {
 
     static private SqlSession session;
     static public void start(){
-        try {
-            String resource = "dbserver/sqlMapConfig.xml";
-            InputStream inputStream = Resources.getResourceAsStream(resource);
-            SqlSessionFactory sqlSessionFactory =
-                    new SqlSessionFactoryBuilder().build(inputStream);
-
-            session = sqlSessionFactory.openSession();    // 获取到 SqlSession
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        session = MybatisFactory.getFactory().openSession();    // 获取到 SqlSession
     }
     static public void close(){
         session.close();
