@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NotificationMapper">
+
+    <insert id="insertAndSetId" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO notification
+        (create_time,last_call,fail_time,creater,type,group_id,content)
+        VALUES (CURDATE(),CURRENT_TIMESTAMP(),'${failTime}',${creater},${type},${groupId},'${content}')
+    </insert>
+    
+    <delete id="deleteById">
+        DELETE FROM notification
+        WHERE id = ${id};
+    </delete>
+
+    <select id="selectByCreaterID" resultType="dbserver.qe.com.bean.Notification">
+        SELECT
+            id,
+            create_time AS 'createTime',
+            last_call AS 'lastCallTime',
+            fail_time AS 'failTime',
+            creater,
+            type,
+            group_id AS 'groupId',
+            content
+        FROM notification
+        WHERE creater = ${id}
+        ORDER BY create_time DESC;
+    </select>
+
+    <select id="selectByUsersGroup" parameterType="dbserver.qe.com.bean.User" resultType="dbserver.qe.com.bean.Notification">
+        SELECT
+            id,
+            create_time AS 'createTime',
+            last_call AS 'lastCallTime',
+            fail_time AS 'failTime',
+            creater,
+            type,
+            group_id AS 'groupId',
+            content
+        FROM notification
+        WHERE group_id IN(
+            SELECT group_id
+            FROM roster
+            WHERE user_id = ${id}
+        );
+    </select>
+
+    <update id="updateLastCallTime">
+        UPDATE notification
+        SET last_call = '${lastCallTime}'
+        WHERE id = ${id};
+    </update>
+</mapper>

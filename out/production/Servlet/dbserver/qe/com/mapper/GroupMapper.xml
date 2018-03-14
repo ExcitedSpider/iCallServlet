@@ -40,6 +40,11 @@
               );
     </select>
 
+    <select id="selectRoster" resultType="dbserver.qe.com.bean.Roster">
+        SELECT * FROM roster
+        WHERE user_id = ${userID} AND group_id = ${groupId};
+    </select>
+
     <delete id="deleteRoster">
         DELETE FROM roster
         WHERE group_id = ${groupId}

@@ -41,4 +41,3 @@
         DELETE FROM USER WHERE ID = #{id}
     </delete>
 </mapper>
-
