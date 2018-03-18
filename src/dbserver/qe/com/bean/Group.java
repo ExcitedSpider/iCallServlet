@@ -76,12 +76,13 @@ public class Group {
 
     @Override
     public String toString() {
-        return new StringBuilder()
-                .append("id:\t"+getId()+"\n")
-                .append("name:\t"+getName()+"\n")
-                .append("host:\t"+getHost()+"\n")
-                .append("type:\t"+getType()+"\n")
-                .append("rDate:\t"+getRegistDate()+"\n")
-                .toString();
+        return "Group{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", host=" + host +
+                ", about='" + about + '\'' +
+                ", type=" + type +
+                ", regist_date=" + regist_date +
+                '}';
     }
 }

@@ -52,4 +52,13 @@ public class Roster {
         return rosterTime;
     }
 
+    @Override
+    public String toString() {
+        return "Roster{" +
+                "groupId=" + groupId +
+                ", userID=" + userID +
+                ", type=" + type +
+                ", rosterTime=" + rosterTime +
+                '}';
+    }
 }

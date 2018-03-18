@@ -65,7 +65,8 @@ public class GroupDAO {
      */
     static public void insertAndSetId(Group group){
         session.insert(Mappername+"insertAndSetId",group);
-        session.insert(Mappername+"joinGroup",new Roster(group.getId(),group.getHost(),0));
+        Roster roster = new Roster(group.getId(),group.getHost(),0);
+        session.insert(Mappername+"joinGroup",roster);
         session.commit();
     }
 
@@ -74,7 +75,7 @@ public class GroupDAO {
      * @param group 包含欲删除群id字段的group对象
      */
     static public void deleteGroup(Group group){
-        session.delete(Mappername+"deleteGroupById");
+        session.delete(Mappername+"deleteGroupById",group);
         session.commit();
     }
 

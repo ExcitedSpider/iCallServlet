@@ -3,6 +3,9 @@ package dbserver.qe.com.bean;
 import java.sql.Date;
 import java.sql.Timestamp;
 
+/**
+ * 这只是一个javabean
+ */
 public class Notification {
     public static final int NORMAL_TYPE=0;
 

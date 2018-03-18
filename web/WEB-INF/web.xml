@@ -20,4 +20,31 @@
         <servlet-name>UserRegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>CreateClassServlet</servlet-name>
+        <servlet-class>servletserver.CreateClass</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateClassServlet</servlet-name>
+        <url-pattern>/class/create</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DismissClassServlet</servlet-name>
+        <servlet-class>servletserver.DismissClass</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DismissClassServlet</servlet-name>
+        <url-pattern>/class/dismiss</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>JoinClassServlet</servlet-name>
+        <servlet-class>servletserver.JoinClass</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>JoinClassServlet</servlet-name>
+        <url-pattern>/class/join</url-pattern>
+    </servlet-mapping>
 </web-app>
