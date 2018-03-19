@@ -1,6 +1,6 @@
 package servletserver;
 
-import service.GroupService;
+import service.NotificationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,12 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-public class DismissClass extends HttpServlet {
+public class DeleteNotification extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            GroupService.dismissGroup(request);
-        }catch (Exception e){
+            NotificationService.deleteNotification(request);
+        }catch (IOException e){
             e.printStackTrace();
         }
 

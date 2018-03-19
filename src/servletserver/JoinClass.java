@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-@WebServlet(name = "JoinClass")
 public class JoinClass extends HttpServlet {
 
     private HashMap<String,String> form = new HashMap<>();

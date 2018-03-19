@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "UserServerServlet")
 public class UserLogin extends HttpServlet {
     private static Logger logger = LogManager.getLogger(UserLogin.class.getName());
     private Map<String,String> form = null;

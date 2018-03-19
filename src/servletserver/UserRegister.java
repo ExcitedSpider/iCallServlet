@@ -14,7 +14,6 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "UserRegister")
 public class UserRegister extends HttpServlet {
     private Map<String,String> form;
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

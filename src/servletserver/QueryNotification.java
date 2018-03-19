@@ -1,9 +1,8 @@
 package servletserver;
 
 import com.google.gson.Gson;
-import dbserver.qe.com.bean.Group;
-import org.apache.log4j.Logger;
-import service.GroupService;
+import dbserver.qe.com.bean.Notification;
+import service.NotificationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,28 +11,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
-import java.util.HashMap;
+import java.util.List;
 
-public class CreateClass extends HttpServlet {
-    static private Logger logger = Logger.getLogger(CreateClass.class);
 
-    private HashMap<String,String> form = new HashMap<>();
-
+public class QueryNotification extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter writer = response.getWriter();
+        response.setContentType("json/application;charset=UTF-8");
+
+        Gson gson = new Gson();
+        List<Notification> list = null;
+        PrintWriter writer = null;
         try{
-            Integer id = GroupService.createGroup(request);
-            form.put("error","0");
-            form.put("classId",id.toString());
+            writer = response.getWriter();
+            list = NotificationService.QueryNotification(request);
         }catch (Exception e){
             e.printStackTrace();
-            form.put("error","3");
-            form.put("classID","-1");
         }finally {
-            Gson json = new Gson();
-            json.toJson(form,writer);
-            writer.close();
+            gson.toJson(list,writer);
+            if (writer != null) {
+                writer.close();
+            }
         }
     }
 

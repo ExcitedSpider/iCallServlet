@@ -1,17 +1,22 @@
 package service;
 
 import dbserver.qe.com.GroupDAO;
+import dbserver.qe.com.NotificationDAO;
 import dbserver.qe.com.bean.Group;
+import dbserver.qe.com.bean.Notification;
 import dbserver.qe.com.bean.Roster;
+import dbserver.qe.com.bean.User;
+import dbserver.qe.com.tool.DateTools;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.List;
 
 public class GroupService {
     public static int createGroup(HttpServletRequest request) throws IOException{
         Group group = new Group();
 
-        request.setCharacterEncoding("UTF-8");
         group.setName(request.getParameter("class_name"));
         group.setType(Integer.parseInt(request.getParameter("class_type")));
         group.setHost(Integer.parseInt(request.getParameter("creater")));
@@ -29,7 +34,6 @@ public class GroupService {
     public static void dismissGroup(HttpServletRequest request) throws IOException{
         Group group = new Group();
 
-        request.setCharacterEncoding("UTF-8");
         group.setId(Integer.parseInt(request.getParameter("class")));
 
         GroupDAO.start();
@@ -50,4 +54,29 @@ public class GroupService {
         GroupDAO.insertRoster(roster);
         GroupDAO.close();
     }
+
+    public static List<Group> queryGroup(HttpServletRequest request) throws IOException{
+        User user = new User();
+
+        user.setId(Integer.parseInt(request.getParameter("user")));
+        System.out.println(user);
+
+        GroupDAO.start();
+        List<Group> groups = GroupDAO.selectUserGroup(user);
+        GroupDAO.close();
+
+        return groups;
+    }
+
+    public static void quitGroup(HttpServletRequest request) throws  IOException{
+        Roster roster = new Roster();
+
+        roster.setUserID(Integer.parseInt(request.getParameter("user")));
+        roster.setGroupId(Integer.parseInt(request.getParameter("class")));
+
+        GroupDAO.start();
+        GroupDAO.deleteRoster(roster);
+        GroupDAO.close();
+    }
+
 }

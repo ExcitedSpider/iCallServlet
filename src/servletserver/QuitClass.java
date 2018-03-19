@@ -9,15 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-public class DismissClass extends HttpServlet {
+public class QuitClass extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            GroupService.dismissGroup(request);
+        try{
+            GroupService.quitGroup(request);
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

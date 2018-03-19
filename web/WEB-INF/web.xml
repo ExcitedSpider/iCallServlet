@@ -47,4 +47,49 @@
         <servlet-name>JoinClassServlet</servlet-name>
         <url-pattern>/class/join</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>QueryClassServlet</servlet-name>
+        <servlet-class>servletserver.QueryClass</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QueryClassServlet</servlet-name>
+        <url-pattern>/class/query</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>QuitClassServlet</servlet-name>
+        <servlet-class>servletserver.QuitClass</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QuitClassServlet</servlet-name>
+        <url-pattern>/class/quit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateNotificationServlet</servlet-name>
+        <servlet-class>servletserver.CreateNotification</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreateNotificationServlet</servlet-name>
+        <url-pattern>/class/notification/create</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>QueryNotificationServlet</servlet-name>
+        <servlet-class>servletserver.QueryNotification</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QueryNotificationServlet</servlet-name>
+        <url-pattern>/class/notification/query</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>DeleteNotificationServlet</servlet-name>
+        <servlet-class>servletserver.DeleteNotification</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteNotificationServlet</servlet-name>
+        <url-pattern>/class/notification/delete</url-pattern>
+    </servlet-mapping>
 </web-app>
